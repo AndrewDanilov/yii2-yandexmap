@@ -1,8 +1,8 @@
 {
-    "name": "andrewdanilov/__repsitory_name__",
-    "description": "__repository_desc__",
+    "name": "andrewdanilov/yii2-yandexmap",
+    "description": "Yandex map",
     "type": "library",
-    "keywords": ["php","__samplekey__"],
+    "keywords": ["php","yandex","map"],
     "license": "MIT",
     "authors": [
         {
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "andrewdanilov\\__namespace__\\": "src/"
+            "andrewdanilov\\yandexmap\\": "src/"
         }
     }
 }

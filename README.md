@@ -1,6 +1,6 @@
-__repository_caption__
+Yandex Map
 ===================
-__repository_description__
+Yandex map widget places on any page map with mark.
 
 Installation
 ------------
@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-composer require andrewdanilov/__repository_name__ "dev-master"
+composer require andrewdanilov/yii2-yandexmap "dev-master"
 ```
 
 or add
 
 ```
-"andrewdanilov/__repository_name__": "dev-master"
+"andrewdanilov/yii2-yandexmap": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
