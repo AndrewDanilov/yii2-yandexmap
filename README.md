@@ -1,6 +1,6 @@
 Yandex Map
 ===================
-Yandex map widget places on any page map with mark.
+Yandex map widget places map with mark on any page of your site.
 
 Installation
 ------------
