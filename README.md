@@ -54,7 +54,38 @@ Usage
 ]) ?>
 ```
 
-points.json example
-```json
-//todo
+points.json generate example
+```php
+<?php
+$items = [
+	[
+		"type" => "Feature",
+		"id" => 'point-1',
+		"geometry" => [
+			"type" => "Point",
+			"coordinates" => [52.449837, -1.930617],
+		],
+		"properties" => [
+			"hintContent" => 'some hint',
+			"balloonContent" => 'some text',
+		],
+	],
+	[
+		"type" => "Feature",
+		"id" => 'point-2',
+		"geometry" => [
+			"type" => "Point",
+			"coordinates" => [52.449845, -1.930629],
+		],
+		"properties" => [
+			"hintContent" => 'some other hint',
+			"balloonContent" => 'some other text',
+		],
+	],
+];
+$collection = [
+	"type" => "FeatureCollection",
+	"features" => $items,
+];
+echo json_encode($collection);
 ```
