@@ -1,8 +1,8 @@
 {
     "name": "andrewdanilov/yii2-yandexmap",
     "description": "Yandex map",
-    "type": "library",
-    "keywords": ["php","yandex","map"],
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","yandex","map"],
     "license": "MIT",
     "authors": [
         {
