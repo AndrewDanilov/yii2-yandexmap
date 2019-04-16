@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+/* @var $wrapper string */
 /* @var $id string */
 /* @var $center array */
 /* @var $points array */
@@ -10,7 +11,7 @@
 
 ?>
 
-<div id="<?= $id ?>" class="map-container"></div>
+<?= $wrapper ?>
 
 <script type="text/javascript">
 

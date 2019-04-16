@@ -51,6 +51,11 @@ Usage
 	],
 	//'pointsUrl' => '/points.json', // url to generate array of points instead of manual setting in 'points' param
 	'scroll' => true, // default false
+	'wrapperTag' => 'span', // default 'div'
+	'wrapperOptions' => [ // options passed to \yii\helpers\Html::tag() method for constructing map wrapper
+		'class' => 'map-wrapper',
+		'style' => 'width:50%;'
+	],
 ]) ?>
 ```
 
