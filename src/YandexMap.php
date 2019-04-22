@@ -46,6 +46,20 @@ class YandexMap extends Widget
 		$this->wrapperOptions['id'] = $this->id;
 		$wrapper = Html::tag($this->wrapperTag, null, $this->wrapperOptions);
 
+		if (!isset($this->center['latitude']) || !isset($this->center['longitude'])) {
+			if (!is_array($this->center) || count($this->center) !== 2) {
+				$this->center = [
+					'latitude' => 0,
+					'longitude' => 0,
+				];
+			} else {
+				$this->center = [
+					'latitude' => $this->center[0],
+					'longitude' => $this->center[1],
+				];
+			}
+		}
+
 		return $this->render('yandex-map', [
 			'wrapper' => $wrapper,
 			'id' => $this->id,

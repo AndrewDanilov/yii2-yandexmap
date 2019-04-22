@@ -31,7 +31,7 @@ Usage
 	'center' => [
 		'latitude' => '52.449837',
 		'longitude' => '-1.930617',
-	],
+	], // or in short 'center' => ['52.449837', '-1.930617']
 	'zoom' => 14, // default 12
 	'points' => [
 		[
