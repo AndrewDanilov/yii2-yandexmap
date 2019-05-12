@@ -59,9 +59,9 @@ Usage
 	],
 	// Javascript function name to handle clicks on map.
 	// Works only with sinle point in 'points' array,
-	// other points are ignored. Function can accept 2 params:
-	// coords in text format ('lon, lat') and address of clicked
-	// map point.
+	// other points are ignored. Function can accept 3 params:
+	// map ID string, coords string in format 'lon, lat' and
+	// address string. Passed values represent map clicked point.
 	'jsClickMapCallback' => 'myCallback',
 ]) ?>
 ```

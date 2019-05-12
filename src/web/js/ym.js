@@ -56,7 +56,7 @@ $(function () {
 						ymaps.geocode(coords).then(function (res) {
 							var firstGeoObject = res.geoObjects.get(0);
 							var address = firstGeoObject.getAddressLine();
-							window[params['jsClickMapCallback']](coords, address);
+							window[params['jsClickMapCallback']](id, coords, address);
 						});
 					}
 
