@@ -13,4 +13,14 @@ class YandexMapAsset extends AssetBundle {
 	public $depends = [
 		'yii\web\JqueryAsset',
 	];
+
+	public $apikey;
+
+	public function init()
+	{
+		parent::init();
+		if (isset($this->token)) {
+			$this->js[0] .= '&apikey=' . $this->apikey;
+		}
+	}
 }

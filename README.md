@@ -28,6 +28,7 @@ Usage
 ```php
 <?= \andrewdanilov\yandexmap\YandexMap::widget([
 	'id'  => 'some-unique-dom-id', // optional
+	'apikey' => 'foiw3h7r48fjoa3jf', // yandex map api key (optional)
 	'center' => [
 		'latitude' => '52.449837',
 		'longitude' => '-1.930617',
@@ -54,8 +55,14 @@ Usage
 	'wrapperTag' => 'span', // default 'div'
 	'wrapperOptions' => [ // options passed to \yii\helpers\Html::tag() method for constructing map wrapper
 		'class' => 'map-wrapper',
-		'style' => 'width:50%;'
+		'style' => 'width:50%;',
 	],
+	// Javascript function name to handle clicks on map.
+	// Works only with sinle point in 'points' array,
+	// other points are ignored. Function can accept 2 params:
+	// coords in text format ('lon, lat') and address of clicked
+	// map point.
+	'jsClickMapCallback' => 'myCallback',
 ]) ?>
 ```
 

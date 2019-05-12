@@ -7,6 +7,7 @@ use yii\helpers\Html;
 
 class YandexMap extends Widget
 {
+	public $apikey; // optional
 	// center coordinates
 	// $center = [
 	//     'latitude' => '52.449837',
@@ -45,8 +46,8 @@ class YandexMap extends Widget
 
 	public function run()
 	{
-		$view = $this->getView();
-		YandexMapAsset::register($view);
+		$yandexMapAsset = YandexMapAsset::register($this->getView());
+		$yandexMapAsset->apikey = $this->apikey;
 
 		$this->wrapperOptions['id'] = $this->id;
 		$wrapper = Html::tag($this->wrapperTag, null, $this->wrapperOptions);
