@@ -1,5 +1,16 @@
 $(function () {
 	ymaps.ready(function () {
+
+		function createPlacemark(point, draggable) {
+			return new ymaps.Placemark([point.latitude, point.longitude], {
+				balloonContent: '<b>' + point.title + '</b><br>' + point.text
+			}, {
+				preset: 'islands#icon',
+				iconColor: point.color,
+				draggable: draggable || false,
+			})
+		}
+
 		$.each(ymstore, function (id, params) {
 			var myMap = new ymaps.Map(id, {
 					center: params['center'],
@@ -36,15 +47,53 @@ $(function () {
 
 			} else {
 
-				params['points'].forEach(function(point) {
-					myMap.geoObjects
-						.add(new ymaps.Placemark([point.latitude, point.longitude], {
-							balloonContent: '<b>' + point.title + '</b><br>' + point.text
-						}, {
-							preset: 'islands#icon',
-							iconColor: point.color
-						}));
-				});
+				if (params['jsClickMapCallback'] && typeof window[params['jsClickMapCallback']] !== 'undefined') {
+
+					var myPlacemark;
+
+					// defining address by coords and running callback function with them
+					function runCallback(coords) {
+						ymaps.geocode(coords).then(function (res) {
+							var firstGeoObject = res.geoObjects.get(0);
+							var address = firstGeoObject.getAddressLine();
+							window[params['jsClickMapCallback']](coords, address);
+						});
+					}
+
+					// adding point to map, if it set
+					if (typeof params['points'][0] !== 'undefined') {
+						myPlacemark = createPlacemark(params['points'][0]);
+						myMap.geoObjects.add(myPlacemark);
+					}
+
+					// add click event
+					myMap.events.add('click', function (e) {
+						var coords = e.get('coords');
+
+						// if mark is already set - just move it
+						if (myPlacemark) {
+							myPlacemark.geometry.setCoordinates(coords);
+						}
+						// otherwise - create it
+						else {
+							myPlacemark = createPlacemark(coords);
+							myMap.geoObjects.add(myPlacemark);
+							// add end drag event, to get final coords
+							myPlacemark.events.add('dragend', function () {
+								runCallback(myPlacemark.geometry.getCoordinates());
+							});
+						}
+
+						runCallback(coords);
+					});
+
+				} else {
+
+					params['points'].forEach(function (point) {
+						myMap.geoObjects.add(createPlacemark(point));
+					});
+
+				}
 
 			}
 		});

@@ -8,6 +8,7 @@
 /* @var $pointsUrl string */
 /* @var $zoom int */
 /* @var $scroll boolean */
+/* @var $jsClickMapCallback string */
 
 ?>
 
@@ -37,6 +38,7 @@
 			],
 		<?php } ?>
 		scroll: '<?= $scroll ?>',
+		jsClickMapCallback: '<?= $jsClickMapCallback ?>',
 	};
 
 </script>

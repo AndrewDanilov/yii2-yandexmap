@@ -38,6 +38,11 @@ class YandexMap extends Widget
 	public $wrapperTag = 'div';
 	public $wrapperOptions = [];
 
+	// Javascript function name to handle clicks on map.
+	// Works only with sinle point in points array,
+	// other points are ignored.
+	public $jsClickMapCallback = '';
+
 	public function run()
 	{
 		$view = $this->getView();
@@ -68,6 +73,7 @@ class YandexMap extends Widget
 			'points' => $this->points,
 			'pointsUrl' => $this->pointsUrl,
 			'scroll' => $this->scroll,
+			'jsClickMapCallback' => $this->jsClickMapCallback,
 		]);
 	}
 }
