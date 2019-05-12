@@ -37,7 +37,7 @@
 				<?php } ?>
 			],
 		<?php } ?>
-		scroll: '<?= $scroll ?>',
+		scroll: <?= $scroll ? 'true' : 'false' ?>,
 		jsClickMapCallback: '<?= $jsClickMapCallback ?>',
 	};
 
