@@ -3,7 +3,7 @@ $(function () {
 
 		function createPlacemark(point, draggable) {
 			var balloonContents = [];
-			if (point.isArray()) {
+			if (Array.isArray(point) && point.length === 2) {
 				point = {
 					latitude: point[0],
 					longitude: point[1],
