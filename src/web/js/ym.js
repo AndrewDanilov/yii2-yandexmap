@@ -2,8 +2,26 @@ $(function () {
 	ymaps.ready(function () {
 
 		function createPlacemark(point, draggable) {
+			var balloonContents = [];
+			if (point.isArray()) {
+				point = {
+					latitude: point[0],
+					longitude: point[1],
+				}
+			}
+			if (point.title) {
+				balloonContents.push('<b>' + point.title + '</b>');
+			}
+			if (point.text) {
+				balloonContents.push(point.text);
+			}
+			if (balloonContents.length) {
+				balloonContents = balloonContents.join('<br>');
+			} else {
+				balloonContents = false;
+			}
 			return new ymaps.Placemark([point.latitude, point.longitude], {
-				balloonContent: '<b>' + point.title + '</b><br>' + point.text
+				balloonContent: balloonContents,
 			}, {
 				preset: 'islands#icon',
 				iconColor: point.color,
@@ -62,7 +80,7 @@ $(function () {
 
 					// adding point to map, if it set
 					if (typeof params['points'][0] !== 'undefined') {
-						myPlacemark = createPlacemark(params['points'][0]);
+						myPlacemark = createPlacemark(params['points'][0], true);
 						myMap.geoObjects.add(myPlacemark);
 					}
 
@@ -76,7 +94,7 @@ $(function () {
 						}
 						// otherwise - create it
 						else {
-							myPlacemark = createPlacemark(coords);
+							myPlacemark = createPlacemark(coords, true);
 							myMap.geoObjects.add(myPlacemark);
 							// add end drag event, to get final coords
 							myPlacemark.events.add('dragend', function () {
