@@ -73,7 +73,10 @@ $(function () {
 					function runCallback(coords) {
 						ymaps.geocode(coords).then(function (res) {
 							var firstGeoObject = res.geoObjects.get(0);
-							var address = firstGeoObject.getAddressLine();
+							var fullAddress = firstGeoObject.getAddressLine();
+							var locality = firstGeoObject.getLocalities();
+							var pos = fullAddress.indexOf(locality) + locality.length + 2;
+							var address = fullAddress.substr(pos);
 							window[params['jsClickMapCallback']](id, coords, address);
 						});
 					}
