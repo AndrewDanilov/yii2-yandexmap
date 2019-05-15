@@ -73,8 +73,11 @@ $(function () {
 					function runCallback(coords) {
 						ymaps.geocode(coords).then(function (res) {
 							var firstGeoObject = res.geoObjects.get(0);
+							// полный адрес
 							var fullAddress = firstGeoObject.getAddressLine();
-							var locality = firstGeoObject.getLocalities();
+							// город
+							var locality = firstGeoObject.getLocalities().join(', ');
+							// позиция начала названия улицы в полном адресе
 							var pos = fullAddress.indexOf(locality) + locality.length + 2;
 							var address = fullAddress.substr(pos);
 							window[params['jsClickMapCallback']](id, coords, address);
