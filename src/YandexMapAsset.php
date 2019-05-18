@@ -19,7 +19,7 @@ class YandexMapAsset extends AssetBundle {
 	public function init()
 	{
 		parent::init();
-		if (isset($this->token)) {
+		if (isset($this->apikey)) {
 			$this->js[0] .= '&apikey=' . $this->apikey;
 		}
 	}
