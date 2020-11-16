@@ -10,6 +10,8 @@
 /* @var $scroll boolean */
 /* @var $jsClickMapCallback string */
 
+use andrewdanilov\yandexmap\Strings;
+
 ?>
 
 <?= $wrapper ?>
@@ -23,22 +25,22 @@
 		center: ['<?= $center['latitude'] ?>','<?= $center['longitude'] ?>'],
 		zoom: '<?= $zoom ?>',
 		<?php if ($pointsUrl) { ?>
-			pointsUrl: '<?= $pointsUrl ?>',
+		pointsUrl: '<?= $pointsUrl ?>',
 		<?php } else { ?>
-			points: [
-				<?php foreach ($points as $point) { ?>
-				{
-					title: '<?= addslashes($point['title']) ?>',
-					text:  '<?= addslashes($point['text']) ?>',
-					color: '<?= $point['color'] ?>',
-					latitude:   '<?= $point['latitude'] ?>',
-					longitude:   '<?= $point['longitude'] ?>'
-				},
-				<?php } ?>
-			],
+		points: [
+			<?php foreach ($points as $point) { ?>
+			{
+				title: '<?= Strings::cleanScriptStr($point['title']) ?>',
+				text:  '<?= Strings::cleanScriptText($point['text']) ?>',
+				color: '<?= Strings::cleanScriptStr($point['color']) ?>',
+				latitude:   '<?= Strings::cleanScriptStr($point['latitude']) ?>',
+				longitude:   '<?= Strings::cleanScriptStr($point['longitude']) ?>'
+			},
+			<?php } ?>
+		],
 		<?php } ?>
 		scroll: <?= $scroll ? 'true' : 'false' ?>,
-		jsClickMapCallback: '<?= $jsClickMapCallback ?>',
+		jsClickMapCallback: '<?= Strings::cleanScriptStr($jsClickMapCallback) ?>',
 	};
 
 </script>
