@@ -10,7 +10,7 @@
 /* @var $scroll boolean */
 /* @var $jsClickMapCallback string */
 
-use andrewdanilov\yandexmap\Strings;
+use andrewdanilov\yandexmap\helpers\Strings;
 
 ?>
 

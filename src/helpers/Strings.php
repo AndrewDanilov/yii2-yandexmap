@@ -1,5 +1,5 @@
 <?php
-namespace andrewdanilov\yandexmap;
+namespace andrewdanilov\yandexmap\helpers;
 
 class Strings
 {
