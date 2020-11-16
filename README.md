@@ -19,7 +19,7 @@ or add
 "andrewdanilov/yii2-yandexmap": "~1.0.0"
 ```
 
-to the require section of your `composer.json` file.
+to the `require` section of your `composer.json` file.
 
 
 Usage
@@ -68,7 +68,6 @@ Usage
 
 points.json generate example
 ```php
-<?php
 $items = [
 	[
 		"type" => "Feature",
