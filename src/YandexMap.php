@@ -40,7 +40,7 @@ class YandexMap extends Widget
 	public $wrapperOptions = [];
 
 	// Javascript function name to handle clicks on map.
-	// Works only with sinle point in 'points' array,
+	// Works only with single point in 'points' array,
 	// other points are ignored. Function can accept 3 params:
 	// map ID string, coords string in format 'lon, lat' and
 	// address string. Passed values represent map clicked point.
@@ -48,8 +48,11 @@ class YandexMap extends Widget
 
 	public function run()
 	{
-		$yandexMapAsset = YandexMapAsset::register($this->getView());
-		$yandexMapAsset->apikey = $this->apikey;
+        $view = $this->getView();
+        $view->getAssetManager()->bundles[YandexMapAsset::class] = [
+            'apikey' => $this->apikey,
+        ];
+        YandexMapAsset::register($view);
 
 		$this->wrapperOptions['id'] = $this->id;
 		$wrapper = Html::tag($this->wrapperTag, null, $this->wrapperOptions);

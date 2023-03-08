@@ -28,7 +28,7 @@ Usage
 ```php
 <?= \andrewdanilov\yandexmap\YandexMap::widget([
 	'id'  => 'some-unique-dom-id', // optional
-	'apikey' => 'foiw3h7r48fjoa3jf', // yandex map api key (optional)
+	'apikey' => '', // yandex map api key (optional)
 	'center' => [
 		'latitude' => '52.449837',
 		'longitude' => '-1.930617',
