@@ -27,13 +27,13 @@ Usage
 
 ```php
 <?= \andrewdanilov\yandexmap\YandexMap::widget([
-	'id'  => 'some-unique-dom-id', // optional
-	'apikey' => '', // yandex map api key (optional)
+	'id'  => 'some-unique-dom-id', // optional, an ID applied to widget wrapper
+	'apikey' => '', // optional, yandex map api key
 	'center' => [
 		'latitude' => '52.449837',
 		'longitude' => '-1.930617',
 	], // or in short 'center' => ['52.449837', '-1.930617']
-	'zoom' => 14, // default 12
+	'zoom' => 14, // optional, default 12
 	'points' => [
 		[
 			'title' => 'Point 1 Caption',
@@ -51,18 +51,18 @@ Usage
 		],
 	],
 	//'pointsUrl' => '/points.json', // url to generate array of points instead of manual setting in 'points' param
-	'scroll' => true, // default false
-	'wrapperTag' => 'span', // default 'div'
-	'wrapperOptions' => [ // options passed to \yii\helpers\Html::tag() method for constructing map wrapper
+	'scroll' => true, // optional, default false
+	'wrapperTag' => 'div', // optional, default 'div'
+	'wrapperOptions' => [ // optional, options passed to \yii\helpers\Html::tag() method for constructing map wrapper
 		'class' => 'map-wrapper',
-		'style' => 'width:50%;',
+		'style' => 'width:100%;height:400px;',
 	],
 	// Javascript function name to handle clicks on map.
 	// Works only with sinle point in 'points' array,
 	// other points are ignored. Function can accept 3 params:
 	// map ID string, coords string in format 'lon, lat' and
 	// address string. Passed values represent map clicked point.
-	'jsClickMapCallback' => 'myCallback',
+	'jsClickMapCallback' => 'myCallback', // optional
 ]) ?>
 ```
 
