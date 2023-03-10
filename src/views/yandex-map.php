@@ -8,7 +8,7 @@
 /* @var $pointsUrl string */
 /* @var $zoom int */
 /* @var $scroll boolean */
-/* @var $jsClickMapCallback string */
+/* @var $jsPointsClickCallback string */
 
 use andrewdanilov\yandexmap\helpers\Strings;
 
@@ -30,6 +30,7 @@ use andrewdanilov\yandexmap\helpers\Strings;
 		points: [
 			<?php foreach ($points as $point) { ?>
 			{
+				id: '<?= Strings::cleanScriptStr($point['id']) ?>',
 				title: '<?= Strings::cleanScriptStr($point['title']) ?>',
 				text:  '<?= Strings::cleanScriptText($point['text']) ?>',
 				color: '<?= Strings::cleanScriptStr($point['color']) ?>',
@@ -40,7 +41,7 @@ use andrewdanilov\yandexmap\helpers\Strings;
 		],
 		<?php } ?>
 		scroll: <?= $scroll ? 'true' : 'false' ?>,
-		jsClickMapCallback: '<?= Strings::cleanScriptStr($jsClickMapCallback) ?>',
+		jsPointsClickCallback: '<?= Strings::cleanScriptStr($jsPointsClickCallback) ?>',
 	};
 
 </script>

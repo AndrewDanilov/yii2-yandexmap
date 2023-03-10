@@ -1,12 +1,13 @@
 $(function () {
 	ymaps.ready(function () {
 
-		function createPlacemark(point, draggable) {
+		function createPlacemark(point) {
+			var point_id = point.id || 0;
 			var balloonContents = [];
 			if (Array.isArray(point) && point.length === 2) {
 				point = {
 					latitude: point[0],
-					longitude: point[1],
+					longitude: point[1]
 				}
 			}
 			if (point.title) {
@@ -21,15 +22,23 @@ $(function () {
 				balloonContents = false;
 			}
 			return new ymaps.Placemark([point.latitude, point.longitude], {
-				balloonContent: balloonContents,
+				id: point_id,
+				balloonContent: balloonContents
 			}, {
 				preset: 'islands#icon',
 				iconColor: point.color,
-				draggable: draggable || false,
+				draggable: false
 			})
 		}
 
 		$.each(ymstore, function (id, params) {
+			function onObjectEvent(e) {
+				if (params['jsPointsClickCallback'] && typeof window[params['jsPointsClickCallback']] !== 'undefined') {
+					var point_id = e.get('objectId') || e.get('target').properties.get('id');
+					window[params['jsPointsClickCallback']](point_id);
+				}
+			}
+
 			var myMap = new ymaps.Map(id, {
 					center: params['center'],
 					zoom: params['zoom']
@@ -63,61 +72,15 @@ $(function () {
 					}
 				});
 
+				objectManager.objects.events.add(['click'], onObjectEvent);
+
 			} else {
 
-				if (params['jsClickMapCallback'] && typeof window[params['jsClickMapCallback']] !== 'undefined') {
-
-					var myPlacemark;
-
-					// defining address by coords and running callback function with them
-					function runCallback(coords) {
-						ymaps.geocode(coords).then(function (res) {
-							var firstGeoObject = res.geoObjects.get(0);
-							// полный адрес
-							var fullAddress = firstGeoObject.getAddressLine();
-							// город
-							var locality = firstGeoObject.getLocalities().join(', ');
-							// позиция начала названия улицы в полном адресе
-							var pos = fullAddress.indexOf(locality) + locality.length + 2;
-							var address = fullAddress.substr(pos);
-							window[params['jsClickMapCallback']](id, coords, address);
-						});
-					}
-
-					// adding point to map, if it set
-					if (typeof params['points'][0] !== 'undefined') {
-						myPlacemark = createPlacemark(params['points'][0], true);
-						myMap.geoObjects.add(myPlacemark);
-					}
-
-					// add click event
-					myMap.events.add('click', function (e) {
-						var coords = e.get('coords');
-
-						// if mark is already set - just move it
-						if (myPlacemark) {
-							myPlacemark.geometry.setCoordinates(coords);
-						}
-						// otherwise - create it
-						else {
-							myPlacemark = createPlacemark(coords, true);
-							myMap.geoObjects.add(myPlacemark);
-							// add end drag event, to get final coords
-							myPlacemark.events.add('dragend', function () {
-								runCallback(myPlacemark.geometry.getCoordinates());
-							});
-						}
-
-						runCallback(coords);
-					});
-
-				} else {
-
-					params['points'].forEach(function (point) {
-						myMap.geoObjects.add(createPlacemark(point));
-					});
-
-				}
+				params['points'].forEach(function (point) {
+					var placemark = createPlacemark(point);
+					placemark.events.add(['click'], onObjectEvent);
+					myMap.geoObjects.add(placemark);
+				});
 
 			}
 		});

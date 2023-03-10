@@ -44,14 +44,16 @@ class YandexMap extends Widget
 	// other points are ignored. Function can accept 3 params:
 	// map ID string, coords string in format 'lon, lat' and
 	// address string. Passed values represent map clicked point.
-	public $jsClickMapCallback = '';
+	public $jsPointsClickCallback = '';
 
 	public function run()
 	{
         $view = $this->getView();
-        $view->getAssetManager()->bundles[YandexMapAsset::class] = [
-            'apikey' => $this->apikey,
-        ];
+        if (!empty($this->apikey)) {
+            $view->getAssetManager()->bundles[YandexMapAsset::class] = [
+                'apikey' => $this->apikey,
+            ];
+        }
         YandexMapAsset::register($view);
 
 		$this->wrapperOptions['id'] = $this->id;
@@ -79,7 +81,7 @@ class YandexMap extends Widget
 			'points' => $this->points,
 			'pointsUrl' => $this->pointsUrl,
 			'scroll' => $this->scroll,
-			'jsClickMapCallback' => $this->jsClickMapCallback,
+			'jsPointsClickCallback' => $this->jsPointsClickCallback,
 		]);
 	}
 }
